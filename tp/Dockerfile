@@ -29,7 +29,8 @@ COPY --from=build /app/target/*.jar app.jar
 
 # Variables d'environnement par défaut
 ENV SPRING_PROFILES_ACTIVE=prod
-ENV SERVER_PORT=8080
+ENV SERVER_P
+ORT=8080
 
 EXPOSE 8080
 
