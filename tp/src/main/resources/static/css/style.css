@@ -1,0 +1,68 @@
+/* ── Base ──────────────────────────────────────────────────────── */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main.container {
+    flex: 1;
+}
+
+/* ── Navbar ────────────────────────────────────────────────────── */
+.navbar-brand {
+    font-size: 1.2rem;
+    letter-spacing: -0.3px;
+}
+
+/* ── Cards ─────────────────────────────────────────────────────── */
+.card {
+    border-radius: 12px;
+}
+
+.article-card {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ── Article content ───────────────────────────────────────────── */
+.article-content {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+/* ── Table ─────────────────────────────────────────────────────── */
+.table > :not(caption) > * > * {
+    padding: 0.85rem 0.75rem;
+    vertical-align: middle;
+}
+
+/* ── Footer ────────────────────────────────────────────────────── */
+.footer {
+    margin-top: auto;
+}
+
+/* ── Buttons ───────────────────────────────────────────────────── */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* ── Form controls ─────────────────────────────────────────────── */
+.form-control, .form-select {
+    border-radius: 8px;
+    border-color: #dee2e6;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+}

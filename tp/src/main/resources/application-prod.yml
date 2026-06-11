@@ -1,0 +1,28 @@
+# ─────────────────────────────────────────────────────────────────
+#  PROFIL PROD  →  Base de données MySQL
+#  Lancer avec : -Dspring.profiles.active=prod
+#  Variables d'environnement requises :
+#    DB_URL      → jdbc:mysql://host:3306/dbname
+#    DB_USERNAME → utilisateur MySQL
+#    DB_PASSWORD → mot de passe MySQL
+# ─────────────────────────────────────────────────────────────────
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/spring_tp_prod}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update        # Conserve les données en production
+    show-sql: false
+
+logging:
+  level:
+    com.tp: INFO
+    org.hibernate.SQL: WARN

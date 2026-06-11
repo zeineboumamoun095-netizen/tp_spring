@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Spring TP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" th:href="@{/}"><i class="bi bi-lightning-fill me-2"></i>Spring TP</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/products}"><i class="bi bi-box-seam me-1"></i>Produits</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/articles}"><i class="bi bi-journal-text me-1"></i>Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="/swagger-ui.html" target="_blank"><i class="bi bi-code-slash me-1"></i>API Docs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-0"><i class="bi bi-journal-text me-2 text-success"></i>Blog</h2>
+            <small class="text-muted" th:text="${articles.size()} + ' article(s)'">0 articles</small>
+        </div>
+        <a th:href="@{/articles/new}" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i>Nouvel article
+        </a>
+    </div>
+
+    <!-- Message flash -->
+    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle me-2"></i><span th:text="${successMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Empty state -->
+    <div th:if="${articles.empty}" class="text-center py-5 text-muted">
+        <i class="bi bi-journal fs-1 d-block mb-3"></i>
+        <p>Aucun article. <a th:href="@{/articles/new}">Publier le premier</a></p>
+    </div>
+
+    <!-- Articles grid -->
+    <div class="row g-4" th:if="${!articles.empty}">
+        <div class="col-md-6 col-lg-4" th:each="article : ${articles}">
+            <div class="card h-100 shadow-sm border-0 article-card">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-semibold mb-2" th:text="${article.title}">Titre</h5>
+                    <p class="card-text text-muted small mb-3"
+                       th:text="${#strings.abbreviate(article.content, 120)}">Contenu...</p>
+                    <div class="d-flex align-items-center gap-2 text-muted small">
+                        <i class="bi bi-chat-dots"></i>
+                        <span th:text="${article.comments.size()} + ' commentaire(s)'">0</span>
+                        <span class="ms-auto">
+                            <i class="bi bi-calendar3 me-1"></i>
+                            <span th:text="${article.createdAt != null ? #temporals.format(article.createdAt, 'dd/MM/yyyy') : '—'}">date</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 pb-4 px-4">
+                    <div class="d-flex gap-2">
+                        <a th:href="@{/articles/{id}(id=${article.id})}" class="btn btn-sm btn-success">
+                            <i class="bi bi-eye me-1"></i>Lire
+                        </a>
+                        <a th:href="@{/articles/edit/{id}(id=${article.id})}" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a th:href="@{/articles/delete/{id}(id=${article.id})}"
+                           class="btn btn-sm btn-outline-danger ms-auto"
+                           onclick="return confirm('Supprimer cet article et tous ses commentaires ?')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light border-top mt-5">
+    <div class="container text-center text-muted small">Spring Boot TP &copy; 2024</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
