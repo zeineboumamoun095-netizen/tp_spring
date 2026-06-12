@@ -28,7 +28,7 @@ public class DataInitializer {
             }
 
             // Créer un USER de démonstration
-            var demoUser = userService.createAdmin(
+            var demoUser = userService.createUser(
                     "user",
                     "user@springtp.com",
                     "user123"

@@ -59,11 +59,7 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // ── Swagger accessible sans login ─────────────────────
-                        .requestMatchers(
-                                "/swagger-ui.html",
-                                "/swagger-ui/**",
-                                "/api-docs/**"
-                        ).permitAll()
+                        
 
                         // ── API REST : lecture publique, écriture ADMIN ────────
                         .requestMatchers(org.springframework.http.HttpMethod.GET,

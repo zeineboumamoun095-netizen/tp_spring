@@ -64,6 +64,18 @@ public class UserService implements UserDetailsService {
 
         return userRepository.save(admin);
     }
+    public AppUser createUser(String username, String email, String rawPassword) {
+        if (userRepository.existsByUsername(username)) return null;
+
+        AppUser user = AppUser.builder()
+                .username(username)
+                .email(email)
+                .password(passwordEncoder.encode(rawPassword))
+                .role(Role.USER)
+                .build();
+
+        return userRepository.save(user);
+    }
 
     // ── Liste de tous les utilisateurs (usage ADMIN) ──────────────────
     public List<AppUser> getAllUsers() {
