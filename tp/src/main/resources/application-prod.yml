@@ -15,6 +15,9 @@ spring:
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
+  sql:
+    init:
+      mode: never  # لا تشغّل data.sql في production
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
